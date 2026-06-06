@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者新手上分攻略</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --dark: #1e293b;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --hover: #eff6ff;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 60px;
+        }
+
+        /* 顶部导航 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .header-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            margin-left: 2rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-menu a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+            background: var(--hover);
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page-desc {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--gray);
+        }
+
+        /* 位置板块 */
+        .position-section {
+            margin-bottom: 2rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .position-title {
+            padding: 1rem 1.5rem;
+            background: var(--primary);
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .position-title span {
+            font-size: 1.2rem;
+        }
+
+        .position-desc {
+            padding: 0.8rem 1.5rem;
+            color: var(--gray);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* 英雄卡片 */
+        .hero-list {
+            padding: 1rem 1.5rem;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .hero-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            transition: 0.2s;
+        }
+
+        .hero-card:hover {
+            border-color: var(--primary);
+            background: var(--hover);
+        }
+
+        .hero-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            background: #dbeafe;
+            color: var(--primary);
+        }
+
+        .hero-info p {
+            margin: 0.4rem 0;
+            font-size: 0.92rem;
+            color: #334155;
+        }
+
+        .label {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        /* 上分建议 */
+        .tips-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tips-title {
+            color: #d97706;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .tips-box ul {
+            padding-left: 1.2rem;
+            color: #78350f;
+        }
+
+        .tips-box li {
+            margin: 0.4rem 0;
+        }
+
+        /* 折叠面板 */
+        .content {
+            display: block;
+        }
+        .content.hide {
+            display: none;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .hero-name {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header>
+        <div class="header-title">王者新手上分攻略</div>
+        <div class="nav-menu">
+            <a href="#road">对抗路</a>
+            <a href="#jungle">打野</a>
+            <a href="#mid">中路</a>
+            <a href="#adc">发育路</a>
+            <a href="#support">游走</a>
+            <a href="#tips">上分技巧</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-desc">
+            <h2>全位置英雄推荐 | 出装+铭文+连招 一站式攻略</h2>
+        </div>
+
+        <!-- 对抗路 -->
+        <section class="position-section" id="road">
+            <div class="position-title" onclick="togglePanel(this)">
+                <span>一、对抗路（上路）</span>
+                <span>+</span>
+            </div>
+            <div class="content">
+                <div class="position-desc">核心思路：优先选择有坦度、有续航、带控制的英雄，容错率高，适合新手。</div>
+                <div class="hero-list">
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            程咬金 <span class="tag">T0 新手首选</span>
+                            <span class="tag">坦克/带线牵制</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>大招回血+一技能击飞，能抗能打，带线无解。</p>
+                            <p><span class="label">出装：</span>抵抗之靴 → 红莲斗篷 → 不死鸟之眼 → 暴烈之甲 → 霸者重装 → 不祥征兆</p>
+                            <p><span class="label">铭文：</span>10宿命+10虚空+10调和（堆肉+回血）</p>
+                            <p><span class="label">玩法：</span>对线猥琐发育，4级后强势换血；团战开大进场吸引火力；被抓直接开大跑路。</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            夏洛特 <span class="tag">T1 全能战士</span>
+                            <span class="tag">战士/拉扯</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>被动叠层真伤+减攻速，二技能回血，大招霸体免伤。</p>
+                            <p><span class="label">出装：</span>抵抗之靴 → 暗影战斧 → 冰痕之握 → 永夜守护 → 魔女斗篷 → 名刀</p>
+                            <p><span class="label">铭文：</span>10异变+10鹰眼+7隐匿3夺萃</p>
+                            <p><span class="label">连招：</span>1→2→A→3→A（打满被动，爆发+回血）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 打野 -->
+        <section class="position-section" id="jungle">
+            <div class="position-title" onclick="togglePanel(this)">
+                <span>二、打野位</span>
+                <span>+</span>
+            </div>
+            <div class="content">
+                <div class="position-desc">核心思路：刷野快、有控、能抓人，优先选择操作简单、容错高的英雄。</div>
+                <div class="hero-list">
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            云缨 <span class="tag">T0 版本强势</span>
+                            <span class="tag">刺客/战士</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>枪意被动，技能叠层普攻消耗；大招霸体+减伤。</p>
+                            <p><span class="label">出装：</span>红色打野刀 → 抵抗之靴 → 暗影战斧 → 冰痕之握 → 破军 → 名刀</p>
+                            <p><span class="label">铭文：</span>10异变+10鹰眼+10隐匿（物理穿透+移速）</p>
+                            <p><span class="label">连招：</span>基础 2→A→1→A→3→A→3→A；团战2切入 → 3先手控 → 1补控收割</p>
+                            <p><span class="label">技巧：</span>关闭自动普攻，枪意3可穿墙</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            镜 <span class="tag">T0 节奏之王</span>
+                            <span class="tag">刺客/节奏</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>大招镜像空间，无限位移+爆发，熟练后上限极高。</p>
+                            <p><span class="label">出装：</span>红色打野刀 → 急速战靴 → 暗影战斧 → 宗师之力 → 破军 → 复活甲</p>
+                            <p><span class="label">铭文：</span>10异变+10鹰眼+10隐匿</p>
+                            <p><span class="label">连招：</span>1→3→2→1→A（大招内打满伤害）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 中路 -->
+        <section class="position-section" id="mid">
+            <div class="position-title" onclick="togglePanel(this)">
+                <span>三、中路（法师）</span>
+                <span>+</span>
+            </div>
+            <div class="content">
+                <div class="position-desc">核心思路：清线快、有控、保命强，新手优先选择指向性技能英雄。</div>
+                <div class="hero-list">
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            妲己 <span class="tag">新手T0 简单粗暴</span>
+                            <span class="tag">法师/爆发</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>2技能必中眩晕，1+3连招轻松秒杀脆皮。</p>
+                            <p><span class="label">出装：</span>冷静之靴 → 回响之杖 → 博学者之怒 → 虚无法杖 → 辉月 → 贤者的庇护</p>
+                            <p><span class="label">铭文：</span>10梦魇+10心眼+10狩猎</p>
+                            <p><span class="label">连招：</span>2（晕）→1（伤）→3（收割）</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            沈梦溪 <span class="tag">T0 清线支援快</span>
+                            <span class="tag">法师/消耗</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>一技能远程炸弹，清线速度极快，大招范围爆发，支援能力强。</p>
+                            <p><span class="label">出装：</span>冷静之靴 → 回响之杖 → 博学者之怒 → 虚无法杖 → 辉月 → 复活甲</p>
+                            <p><span class="label">铭文：</span>10梦魇+10心眼+10调和</p>
+                            <p><span class="label">玩法：</span>清完兵线立刻支援边路，团战用大招消耗敌方后排。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 发育路 -->
+        <section class="position-section" id="adc">
+            <div class="position-title" onclick="togglePanel(this)">
+                <span>四、发育路（射手）</span>
+                <span>+</span>
+            </div>
+            <div class="content">
+                <div class="position-desc">核心思路：自保强、持续输出高，新手优先平A型射手。</div>
+                <div class="hero-list">
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            敖隐 <span class="tag">T0 版本答案</span>
+                            <span class="tag">射手/容错</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>大招无法选中，生存与爆发兼备，适配当前版本装备。</p>
+                            <p><span class="label">出装：</span>急速战靴 → 宗师之力 → 无尽战刃 → 破晓 → 泣血之刃 → 名刀</p>
+                            <p><span class="label">铭文：</span>10祸源+10鹰眼+10隐匿</p>
+                            <p><span class="label">玩法：</span>前期猥琐发育，中后期跟随辅助持续输出，大招用于保命或收割。</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            后羿 <span class="tag">新手T0 易上手</span>
+                            <span class="tag">射手/持续输出</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>大招远程控制，一技能分裂箭，普攻伤害极高。</p>
+                            <p><span class="label">出装：</span>急速战靴 → 无尽战刃 → 闪电匕首 → 破晓 → 泣血之刃 → 名刀</p>
+                            <p><span class="label">铭文：</span>10祸源+10鹰眼+10狩猎</p>
+                            <p><span class="label">玩法：</span>紧跟辅助输出，大招可先手开团或远距离支援队友。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 游走辅助 -->
+        <section class="position-section" id="support">
+            <div class="position-title" onclick="togglePanel(this)">
+                <span>五、游走（辅助）</span>
+                <span>+</span>
+            </div>
+            <div class="content">
+                <div class="position-desc">核心思路：开团、保人、抗伤，新手优先选择硬辅。</div>
+                <div class="hero-list">
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            张飞 <span class="tag">T0 全能辅助</span>
+                            <span class="tag">坦克/保护</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>大招变身坦度十足，二技能提供护盾，一技能推开突进刺客。</p>
+                            <p><span class="label">出装：</span>极影 → 抵抗之靴 → 红莲斗篷 → 不祥征兆 → 魔女斗篷 → 霸者重装</p>
+                            <p><span class="label">铭文：</span>10宿命+10虚空+10调和</p>
+                            <p><span class="label">玩法：</span>前期跟随打野游走；团战优先保护核心C位，大招可开团或反手防守。</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-name">
+                            大乔 <span class="tag">T1 功能型辅助</span>
+                            <span class="tag">辅助/传送</span>
+                        </div>
+                        <div class="hero-info">
+                            <p><span class="label">核心：</span>大招全图传送集结队友，二技能快速回城回血，一技能控制敌方。</p>
+                            <p><span class="label">出装：</span>极影 → 抵抗之靴 → 极寒风暴 → 冰霜法杖 → 不祥征兆 → 魔女斗篷</p>
+                            <p><span class="label">铭文：</span>10调和+10虚空+10梦魇</p>
+                            <p><span class="label">玩法：</span>利用传送阵灵活支援，团战召回残血队友，组织多人集火。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 上分建议 -->
+        <div class="tips-box" id="tips">
+            <h3 class="tips-title">六、新手快速上分建议</h3>
+            <ul>
+                <li>固定1-2个本命英雄，不要频繁更换，优先练习妲己、后羿、程咬金、张飞。</li>
+                <li>熟记基础连招，熟练操作后再进行排位对局。</li>
+                <li>时刻观察小地图，主动支援队友，不要一味赖在线上。</li>
+                <li>直接使用推荐出装与铭文，新手不建议自行改动。</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        王者荣耀新手攻略 · 纯静态页面
+    </footer>
+
+    <script>
+        // 折叠/展开面板
+        function togglePanel(el) {
+            const content = el.nextElementSibling;
+            const icon = el.querySelector('span:last-child');
+            content.classList.toggle('hide');
+            icon.textContent = content.classList.contains('hide') ? '+' : '-';
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
